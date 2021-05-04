@@ -1,0 +1,73 @@
+//
+//  CollectionDishDPO.swift
+//  dVolada Aliado
+//
+//  Created by Miguel Ledezma on 15/09/20.
+//  Copyright © 2020 Miguel Ledezma. All rights reserved.
+//
+
+import UIKit
+
+class CollectionDishDPO: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+        
+        let orderID = "orden ID"
+        var Ordenes = Array<Order>()
+
+    
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            collectionView.backgroundColor = .white
+            collectionView.register(PendingOrderCell.self, forCellWithReuseIdentifier: orderID)
+            collectionView.contentInset = UIEdgeInsets(top: 20,left: 0,bottom: 0,right: 0)
+            
+            Ordenes.removeAll()
+            
+            let o = Order()
+            o.name = "o1"
+            o.id = "1"
+            let o2 = Order()
+            o2.name = "o2"
+            o2.id = "12"
+            let o3 = Order()
+            o3.name = "o3"
+            o3.id = "13"
+            
+            Ordenes.append(o)
+            Ordenes.append(o2)
+            Ordenes.append(o3)
+                 
+        }
+        
+        override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            return Ordenes.count
+        }
+        
+        override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+            
+            //Collection de ordenes que se mostraran en el home
+                let orderCell = collectionView.dequeueReusableCell(withReuseIdentifier: orderID, for: indexPath) as! PendingOrderCell
+                orderCell.onden = Ordenes[indexPath.item]
+                orderCell.layer.cornerRadius = 20
+                return orderCell
+        }
+                
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+           
+            return CGSize(width: view.frame.width - 20,height: 100)
+        }
+        
+        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+            return 20
+        }
+        
+        
+       override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let detailPendingOrder = DetailPendingOrder()
+            detailPendingOrder.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(detailPendingOrder, animated: false)
+        }
+    }
+        
+       
+

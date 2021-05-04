@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="322da9ca-9d29-4e47-9f66-11a9ec75b442" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado.xcworkspace/xcuserdata/luissantiagodev.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado.xcworkspace/xcuserdata/luissantiagodev.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Cells/DetailsControllerCells/DishCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Cells/DetailsControllerCells/DishCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Cells/OrderCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Cells/OrderCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Cells/OrdersControllerCell/HeaderOrderCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Cells/OrdersControllerCell/HeaderOrderCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Cells/StoreCell/DayCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Cells/StoreCell/DayCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Cells/StoreCell/HeaderCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Cells/StoreCell/HeaderCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Cells/StoreCell/ScheduleStoreCell.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Cells/StoreCell/ScheduleStoreCell.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Controllers/HeaderDetails.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Controllers/HeaderDetails.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Controllers/HomeTabBarController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Controllers/HomeTabBarController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Controllers/OrdersController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Controllers/OrdersController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Controllers/StoreButtons/New Group/DayCollection.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Controllers/StoreButtons/ScheduleStoreCollection.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Controllers/StoreButtons/ScheduleStoreCollection.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Controllers/StoreController.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Controllers/StoreController.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Helpers/FirebaseHelper.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Helpers/FirebaseHelper.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Helpers/LocalHelper.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Helpers/LocalHelper.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Helpers/ServerHelper.swift" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Helpers/ServerHelper.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dVolada Aliado/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/dVolada Aliado/Info.plist" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1pHS2182UpAqAqDA8kO4JyP4dDh" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="322da9ca-9d29-4e47-9f66-11a9ec75b442" name="Default Changelist" comment="" />
+      <created>1614838311754</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614838311754</updated>
+    </task>
+    <servers />
+  </component>
+</project>
