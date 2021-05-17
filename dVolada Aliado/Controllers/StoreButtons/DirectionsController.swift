@@ -35,7 +35,7 @@ class DirectionsController: UIViewController, CLLocationManagerDelegate, UIColle
         
         let mapController = MapController()
         mapController.direction = item
-        mapController.listener = self
+        //mapController.listener = self
         self.navigationController?.pushViewController(mapController, animated: true)
         
         
@@ -59,7 +59,7 @@ class DirectionsController: UIViewController, CLLocationManagerDelegate, UIColle
     var listDirections = Array<Direction>()
     
     var originDirection : Direction?
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         updateLocation(location: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude))

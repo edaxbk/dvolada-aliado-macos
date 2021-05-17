@@ -8,7 +8,7 @@
 import UIKit
 import SCLAlertView
 
-class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDelegate, ModifierListener{
+class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDelegate, ModifierAddListener{
     
     func onModifierSelected(modifier: Modifier) {
         self.modifiers.append(modifier)
@@ -16,10 +16,13 @@ class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDe
     }
     
     var imgData = Data()
+    var imgURL : String?
     var menu : String?
     var dish = Dish()
+    
     var menuID = "menuID"
     var modifiers = Array<Modifier>()
+    
     var scrollView : UIScrollView = {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -250,6 +253,7 @@ class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDe
             titleLabel.rightAnchor.constraint(equalTo: viewDish.rightAnchor, constant: -20),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
             
+            
             addDishImg.centerXAnchor.constraint(equalTo: viewDish.centerXAnchor),
             addDishImg.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             addDishImg.heightAnchor.constraint(equalToConstant: 200 ),
@@ -304,7 +308,7 @@ class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDe
             lineBottonH3.leftAnchor.constraint(equalTo: viewDish.leftAnchor,constant: 20),
             lineBottonH3.rightAnchor.constraint(equalTo: viewDish.rightAnchor, constant: -20),
             lineBottonH3.heightAnchor.constraint(equalToConstant: 0.5),
-
+            
             
             modificadorLabel.topAnchor.constraint(equalTo: priceDishText.bottomAnchor,constant: 40),
             modificadorLabel.leftAnchor.constraint(equalTo: viewDish.leftAnchor,constant: 20),
@@ -335,6 +339,7 @@ class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDe
         
         tableView.register( ModificadorCell.self, forCellReuseIdentifier: menuID)
     }
+    
     func showErrorMessage(_ message : String){
         SCLAlertView().showError("Error", subTitle: message) // Error
     }
@@ -381,19 +386,14 @@ class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDe
             dish.modifiers = modifiers
         }
         
-        
+        dish.isAvailable = false
+
         if(imgData.isEmpty == false){
-            
-            let dispatchQueue = DispatchQueue(label: "SerialQueue")
-            
-            dispatchQueue.async {
-                
-            
             let imagenRef = FirebaseAPI.shared.storage.child("PruebaLalo/rc-upload-\(LocalHelper.shared.getClient()?._id ?? "Store")-\( Int.random(in: 10000...99999)).jpeg")
             let metadata = FirebaseAPI.shared.metadata
             metadata.contentType = "image/jpeg"
             
-                imagenRef.putData(self.imgData ,metadata: metadata){ [self] (metadata,err) in
+            imagenRef.putData(imgData ,metadata: metadata){ [self] (metadata,err) in
                 guard metadata != nil else{
                     return
                 }
@@ -402,36 +402,32 @@ class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDe
                     guard let downloadURL = url else {
                         return
                     }
+
+                    var arr = [""]
+                    arr[0] = downloadURL.absoluteString
+                    self.dish.images = arr
                     
-                    print("add image")
-                    
-                    if (self.dish.images?.isEmpty == false){
-                        print("No Empty")
-                        //print("Hay imageDISH::", (self.dish?.images?[0])!)
-                        self.dish.images?.append(downloadURL.absoluteString)
-                    }else {
-                        print("Empty")
-                    
-                        self.dish.images?.append(downloadURL.absoluteString)
-                        //self.dish.images![0] = downloadURL.absoluteString
-                        //print(" No Hay imageDISH::",(self.dish?.images?[0])!)
-                        //self.dish?.images = downloadURL.absoluteString
+                    let encoder = JSONEncoder()
+                    encoder.outputFormatting = .prettyPrinted
+                    let data = try! encoder.encode(self.dish)
+                    print("::::: -- ",String(data: data, encoding: .utf8)!)
+                        
+                    ServerHelper.shared.postDishMenuFromStore(id: (LocalHelper.shared.getClient()?._id)!, menuId: self.menu!, dish: self.dish) { (result) in
+                        print("DISH OK:",result)
+                        self.navigationController?.popViewController(animated: true)
                     }
+                    
                 }
             }
+        }else{
+            
+            ServerHelper.shared.postDishMenuFromStore(id: (LocalHelper.shared.getClient()?._id)!, menuId: self.menu!, dish: self.dish) { (result) in
+                print("DISH OK:",result)
+                self.navigationController?.popViewController(animated: true)
+
+            }
         }
-        }
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        let data = try! encoder.encode(self.dish)
-        print("::::: -- ",String(data: data, encoding: .utf8)!)
-        
-        
-        ServerHelper.shared.postDishMenuFromStore(id: (LocalHelper.shared.getClient()?._id)!, menuId: menu!, dish: self.dish) { (result) in
-            print("DISH OK:",result)
-        }
-        
-        self.navigationController?.popViewController(animated: true)
+           
     }
     
     @objc func CreateModificadorBtn(_sender : UIButton) {
@@ -439,7 +435,6 @@ class AddNewDishController : UIViewController, UITextViewDelegate, UITableViewDe
         //let modificadoreesController = ModifierCollectionView(collectionViewLayout: UICollectionViewFlowLayout())
         //self.navigationController?.pushViewController(modificadoreesController, animated: true)
     }
-    
 }
 
 extension AddNewDishController : UITableViewDataSource {
@@ -474,12 +469,14 @@ extension AddNewDishController : UITableViewDataSource {
     }
     
 }
+
 extension AddNewDishController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
         return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         imgData = (image?.jpegData(compressionQuality: 0.1))!
         addDishImg.image = image

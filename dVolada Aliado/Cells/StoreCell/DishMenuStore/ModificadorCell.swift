@@ -7,11 +7,6 @@
 //
 import UIKit
 
-protocol AddTableViewCellDelegate: class {
-    func didPressButtonAdd(sender: UIButton)
-    func didPressButtonEdit(sender: UIButton)
-
-}
 
 class ModificadorCell: UITableViewCell, UITableViewDelegate {
     
@@ -151,7 +146,7 @@ class ModificadorCell: UITableViewCell, UITableViewDelegate {
             
            
         ])
-        tableView.register( UITableViewCell.self, forCellReuseIdentifier: modId)
+        tableView.register( ModifierItemCell.self, forCellReuseIdentifier: modId)
         
         addButton.addTarget(self, action: #selector(addButon), for: .touchUpInside)
         editButton.addTarget(self, action: #selector(editButon), for: .touchUpInside)
@@ -176,25 +171,8 @@ extension ModificadorCell : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: modId, for: indexPath)
-        cell.textLabel?.text =  modificador?.options?[indexPath.item].name
-        cell.selectionStyle = .none
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = .clear
-        label.text = "$ " + String((modificador?.options![indexPath.item].fee!)!)
-        label.textAlignment = .right
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        cell.textLabel?.text = modificador?.options![indexPath.item].name
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
-        cell.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: cell.topAnchor),
-            label.bottomAnchor.constraint(equalTo: cell.bottomAnchor),
-            label.widthAnchor.constraint(equalToConstant: 100),
-            label.rightAnchor.constraint(equalTo: cell.rightAnchor),
-        ])
+        let cell = tableView.dequeueReusableCell(withIdentifier: modId, for: indexPath) as! ModifierItemCell
+        cell.optionItem = modificador?.options?[indexPath.item]
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

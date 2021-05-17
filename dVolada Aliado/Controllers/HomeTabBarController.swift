@@ -109,13 +109,11 @@ class HomeTabBarController: ESTabBarController, UITabBarControllerDelegate , Ord
             
         } onFailure: { (err) in
             print("Error in get store::",err)
+            LocalHelper.shared.setClient(nil)
         }
     }
     
-    
     func setupTabBar() {
-        
-    
         
         pending.titleTab = "Ordenes Pendientes"
         preparing.titleTab = "Ordenes en preparación"

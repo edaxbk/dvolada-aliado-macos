@@ -15,7 +15,7 @@ class DishesMenuStoreTableView : UIViewController, UITableViewDelegate {
     var dishID = "dishID"
     
     override func viewWillAppear(_ animated: Bool) {
-        ServerHelper.shared.getMenuFromStore(id: (LocalHelper.shared.getClient()?._id)!) { (arrayMenu) in
+        ServerHelper.shared.getMenuFromStoreAll(id: (LocalHelper.shared.getClient()?._id)!) { (arrayMenu) in
             arrayMenu.map{ (menu) in
                 if( self.menu?._id == menu._id){
                     self.menu = menu

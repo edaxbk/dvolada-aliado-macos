@@ -25,6 +25,8 @@ class Client : Decodable , Encodable {
     
     var complete_name: String?
     
+    var first_name: String?
+        
     var openpay_id: String?
     
     var uid: String?

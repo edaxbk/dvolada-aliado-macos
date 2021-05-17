@@ -328,12 +328,10 @@ class DayScheduleController: UIViewController {
         
         ServerHelper.shared.updateStoreSchedule(store: store!) { (getStore) in
             LocalHelper.shared.setClient(getStore)
-            
+            self.navigationController?.popViewController(animated: true)
         } failure: { (err) in
             print("Error ",err!)
         }
-        self.reloadInputViews()
-        self.navigationController?.popViewController(animated: true)
     }
     
 }

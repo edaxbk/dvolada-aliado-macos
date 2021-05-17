@@ -7,9 +7,7 @@
 //
 
 import UIKit
-protocol ModifierListener {
-    func onModifierSelected(modifier : Modifier)
-}
+
 
 class ModifierDishTableView : UIViewController, UITableViewDelegate {
     
@@ -18,7 +16,7 @@ class ModifierDishTableView : UIViewController, UITableViewDelegate {
     var modifier = Modifier ()
     var modifiers = Array<Modifier>()
     
-    var listener : ModifierListener?
+    var listener : ModifierAddListener?
     
     override func viewWillAppear(_ animated: Bool) {
         ServerHelper.shared.getModifiersStore(id: (LocalHelper.shared.getClient()?._id)!) { (getModifiers) in
@@ -75,8 +73,6 @@ class ModifierDishTableView : UIViewController, UITableViewDelegate {
 
 extension ModifierDishTableView : AddTableViewCellDelegate {
     func didPressButtonAdd(sender: UIButton) {
-        print("Presionaster Add ::",sender.tag)
-        print("MODIFICADOR ID ::", modifiers[sender.tag].title ?? "title")
         listener?.onModifierSelected(modifier: modifiers[sender.tag])
         self.navigationController?.popViewController(animated: true)
     }

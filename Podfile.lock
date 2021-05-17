@@ -115,11 +115,15 @@ PODS:
     - Kingfisher/Core (= 5.15.6)
   - Kingfisher/Core (5.15.6)
   - leveldb-library (1.22.1)
+  - M13Checkbox (3.4.0)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - NVActivityIndicatorView (5.1.1):
+    - NVActivityIndicatorView/Base (= 5.1.1)
+  - NVActivityIndicatorView/Base (5.1.1)
   - PromisesObjC (1.2.12)
   - SCLAlertView (0.8)
   - SwiftyJSON (4.3.0)
@@ -138,6 +142,8 @@ DEPENDENCIES:
   - GooglePlaces
   - JGProgressHUD
   - Kingfisher (~> 5.0)
+  - M13Checkbox
+  - NVActivityIndicatorView
   - SCLAlertView
   - SwiftyJSON (~> 4.0)
 
@@ -164,7 +170,9 @@ SPEC REPOS:
     - JGProgressHUD
     - Kingfisher
     - leveldb-library
+    - M13Checkbox
     - nanopb
+    - NVActivityIndicatorView
     - PromisesObjC
     - SCLAlertView
     - SwiftyJSON
@@ -191,11 +199,13 @@ SPEC CHECKSUMS:
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
   Kingfisher: b3554e7bf6106115b44e8795300bad580ef2fdc7
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  M13Checkbox: 6f59404540ac98ba83a3d1afac335895a40c6a5d
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  NVActivityIndicatorView: 1f6c5687f1171810aa27a3296814dc2d7dec3667
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 3b5a0a8aa4a2b71e9e3b5f3d5c82c8381cc08ca4
+PODFILE CHECKSUM: b501ad8224e49a9356c1618d289b9be3a5d32da7
 
 COCOAPODS: 1.10.1

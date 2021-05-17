@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class PaymentCharge : Decodable , Encodable {
     
     
@@ -18,12 +17,13 @@ class PaymentCharge : Decodable , Encodable {
     var total: Double?
     var subTotal: Double?
     var typeOfPayment: String?
-    var fee: Int?
+    var fee: Double?
     var cashClient: Int?
     var device_session_id: String?
     var source_id: String?
     var cvv2: String?
     var discount: Double?
+    var priceFee : PriceFee?
     
     init() {
         discount = 0.0

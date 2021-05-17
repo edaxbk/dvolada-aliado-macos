@@ -7,6 +7,13 @@
 //
 import Foundation
 
+
+class OrderServer : Decodable , Encodable {
+    var data : String?
+    var type = "IOS"
+}
+
+
 class Order : Decodable, Encodable {
     
     var _id: String?
@@ -18,6 +25,8 @@ class Order : Decodable, Encodable {
     var cart: Array<Cart>?
     
     var store: Store?
+    
+    var isFromStore: Bool?
     
     var status: String?
     
@@ -64,7 +73,6 @@ class TransactionListResponse : Decodable , Encodable {
 
     
 }
-
 
 class TransactionPeople : Decodable , Encodable{
     

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GooglePlaces
+import CoreLocation
 
 class StoreController : UIViewController {
     
@@ -172,15 +174,15 @@ class StoreController : UIViewController {
         return label
     }()
     let closeSessionBtn : UIButton = {
-        let btn = UIButton()
-        btn.backgroundColor = .orange
+        let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.layer.cornerRadius = 10
+        btn.setTitle("Cerrar Session", for: .normal)
+        btn.layer.masksToBounds = true
+        btn.layer.cornerRadius = 15
         btn.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         btn.tintColor = .white
         btn.imageEdgeInsets.left = -100
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        btn.setTitle("Cerrrar Session", for: .normal)
         return btn
     }()
     //Lineas Grises
@@ -285,10 +287,14 @@ class StoreController : UIViewController {
             
         ])
         
+        closeSessionBtn.layerGradient(startPoint: .topLeft, endPoint: .bottomRight, colorArray: [UIColor.primaryColor.cgColor, UIColor.middleColor.cgColor , UIColor.secondaryColor.cgColor], type: .axial)
+        
         menuBtn.addTarget(self, action: #selector(handleMore), for: .touchUpInside)
         backToScreenBtn.addTarget(self, action: #selector(handleDismissView), for: .touchUpInside)
         closeSessionBtn.addTarget(self, action: #selector(closeSession), for: .touchUpInside)
     }
+    
+    
     @objc func handleDismissView() {
         print("dismiss")
         dismiss(animated: true, completion: nil)
@@ -296,7 +302,6 @@ class StoreController : UIViewController {
     }
     
     @objc func handleMore() {
-        print("handle more :::::")
         settingsLauncher.showSettings()
     }
     
@@ -307,7 +312,7 @@ class StoreController : UIViewController {
     }()
     
     @objc func closeSession() {
-        //LocalHelper.shared.setClient(nil)
+        LocalHelper.shared.setClient(nil)
         let loginController = LoginController()
         let loginNavigationController = UINavigationController(rootViewController: loginController)
         loginNavigationController.modalPresentationStyle = .fullScreen
@@ -358,11 +363,12 @@ class StoreController : UIViewController {
         menuController.title = self.seting
         self.present(menunavigationController, animated: true, completion: nil)
     }
-    
+     
     @objc func openTripsOutCollection() {
         
-        //let tripsController = TripsOutController()
+        
         let tripsController = MapController()
+        tripsController.locationVar = store?.location
         let tnavigationController = UINavigationController(rootViewController: tripsController)
         tnavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         tnavigationController.navigationBar.backgroundColor = .orange
@@ -370,6 +376,7 @@ class StoreController : UIViewController {
         tnavigationController.navigationBar.tintColor = .black
         tripsController.title = seting
         self.present(tnavigationController, animated: true, completion: nil)
+         
     }
     
     @objc func openstatisticsController() {

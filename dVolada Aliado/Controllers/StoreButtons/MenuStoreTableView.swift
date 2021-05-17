@@ -12,7 +12,7 @@ class MenuStoreTableView : UIViewController, UITableViewDelegate {
     var listOfMenu = Array<Menu>()
     
     override func viewWillAppear(_ animated: Bool) {
-        ServerHelper.shared.getMenuFromStore(id: (LocalHelper.shared.getClient()?._id)!) { (arrayMenu) in
+        ServerHelper.shared.getMenuFromStoreAll(id: (LocalHelper.shared.getClient()?._id)!) { (arrayMenu) in
             self.listOfMenu.removeAll()
             self.listOfMenu.append(contentsOf: arrayMenu)
             DispatchQueue.main.async {

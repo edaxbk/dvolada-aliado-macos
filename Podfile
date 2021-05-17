@@ -23,5 +23,8 @@ target 'dVolada Aliado' do
   pod "ESTabBarController-swift"
   pod 'Firebase/Storage'
   pod 'Firebase/Auth'
+  pod 'M13Checkbox'
+  pod 'NVActivityIndicatorView'
+
  
 end

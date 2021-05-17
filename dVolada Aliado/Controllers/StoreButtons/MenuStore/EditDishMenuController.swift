@@ -8,10 +8,17 @@
 import UIKit
 import SCLAlertView
 
-class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewDelegate{
+class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewDelegate,ModifierAddListener{
+        
+    func onModifierSelected(modifier: Modifier) {
+        self.modifiers.append(modifier)
+        self.tableView.reloadData()
+    }
     
     var menuID = "menuID"
     var modifiers = Array<Modifier>()
+    var imgData = Data()
+
     var dish : Dish? {
         didSet {
             
@@ -27,10 +34,21 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
             if let image = dish?.images?.first{
                 addDishImg.loadImage(url: image)
             }
+            if let isAvailable = dish?.isAvailable {
+                switchAvailable.isOn = isAvailable
+            }
+            if let modifiers = dish?.modifiers {
+                self.modifiers = modifiers
+            }
         }
     }
     
-    var imgData = Data()
+    
+    var switchAvailable : UISwitch = {
+        let sw = UISwitch()
+        sw.translatesAutoresizingMaskIntoConstraints = false
+        return sw
+    }()
     
     var scrollView : UIScrollView = {
         let scroll = UIScrollView()
@@ -251,6 +269,8 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
         viewDish.addSubview(lineBottonH3)
         viewDish.addSubview(modificadorLabel)
         viewDish.addSubview(modificadorBtn)
+        viewDish.addSubview(switchAvailable)
+
         
         viewDish.addSubview(tableView)
         
@@ -278,6 +298,9 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
             titleLabel.leftAnchor.constraint(equalTo: viewDish.leftAnchor,constant: 20),
             titleLabel.rightAnchor.constraint(equalTo: viewDish.rightAnchor, constant: -20),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
+            
+            switchAvailable.rightAnchor.constraint(equalTo: viewDish.rightAnchor,constant: -20),
+            switchAvailable.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             
             addDishImg.centerXAnchor.constraint(equalTo: viewDish.centerXAnchor),
             addDishImg.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
@@ -360,6 +383,9 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
         ])
         textViewDidChange(descDishText)
         
+        switchAvailable.addTarget(self, action: #selector(valueChange), for: .valueChanged)
+
+        
         modificadorBtn.addTarget(self, action: #selector(actionModifierBtn), for: .touchUpInside)
         
         imageButon.addTarget(self, action: #selector(acctionBtnGaleria), for: .touchUpInside)
@@ -371,9 +397,18 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
         tableView.register( ModificadorCell.self, forCellReuseIdentifier: menuID)
         
     }
+    @objc func valueChange(_sender : UISwitch) {
+        
+    }
+    func showErrorMessage(_ message : String){
+        SCLAlertView().showError("Error", subTitle: message) // Error
+    }
+    
+    
     @objc func actionModifierBtn(){
         let modifiertableView = ModifierDishTableView()
         modifiertableView.title = "Modificadores"
+        modifiertableView.listener = self
         self.navigationController?.pushViewController(modifiertableView, animated: true)
     }
     
@@ -382,11 +417,9 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
-    func showErrorMessage(_ message : String){
-        SCLAlertView().showError("Error", subTitle: message) // Error
+    @objc func acctionBtnGaleria(_sender : UIButton) {
+        self.present(pickerImage, animated: true, completion: nil)
     }
-    
     @objc func actionConfirmBtn(_sender : UIButton) {
         
         if((nameDishText.text?.isEmpty)!){
@@ -415,6 +448,13 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
             priceDishText.backgroundColor = .white
             dish?.price = Int(priceDishText.text!)
         }
+        if(modifiers.isEmpty == false){
+            dish?.modifiers = modifiers
+        }else{
+            dish?.modifiers?.removeAll()
+        }
+        
+        dish?.isAvailable = switchAvailable.isOn
         
         if(imgData.isEmpty == false){
             let imagenRef = FirebaseAPI.shared.storage.child("PruebaLalo/rc-upload-\(LocalHelper.shared.getClient()?._id ?? "Store")-\( Int.random(in: 10000...99999)).jpeg")
@@ -430,51 +470,47 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
                     guard let downloadURL = url else {
                         return
                     }
-                    if ((self.dish?.images?.isEmpty) != nil){
-                        print("No Empty")
-                        //print("Hay imageDISH::", (self.dish?.images?[0])!)
-                        self.dish?.images?.append(downloadURL.absoluteString)
-                    }else {
-                        print("Empty")
-                        self.dish?.images![0] = downloadURL.absoluteString
-                        //print(" No Hay imageDISH::",(self.dish?.images?[0])!)
-                        //self.dish?.images = downloadURL.absoluteString
-                    }
-                    //self.dish?.imag
+                
+                    var arr = [""]
+                    arr[0] = downloadURL.absoluteString
+                    self.dish?.images = arr
                     
+                    let encoder = JSONEncoder()
+                    encoder.outputFormatting = .prettyPrinted
+                    let data = try! encoder.encode(self.dish)
+                    print("::::: -- ",String(data: data, encoding: .utf8)!)
                     
                     ServerHelper.shared.putDishFromMenu(dish: self.dish!) { (succes) in
-                        print("Succes::",succes)
-                        self.dismiss(animated: true, completion: nil)
+                        print("Succes::")
+                        self.navigationController?.popViewController(animated: true)
                     }
                 }
             }
+        }else{
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted
+            let data = try! encoder.encode(self.dish)
+            print("::::: -- ",String(data: data, encoding: .utf8)!)
+            
+            print("UPDATE DISH")
+            ServerHelper.shared.putDishFromMenu(dish: self.dish!) { (succes) in
+                print("Succes::")
+                self.navigationController?.popViewController(animated: true)
+            }
         }
-    
-        
-        
-        print("UPDATE DISH")
-        
-        
-    
-        
-    }
-    
-    @objc func acctionBtnGaleria(_sender : UIButton) {
-        self.present(pickerImage, animated: true, completion: nil)
     }
 }
 
 extension EditDishMenuController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (dish?.modifiers!.count)!
+        return modifiers.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: menuID) as! ModificadorCell
         cell.myView.heightAnchor.constraint(equalToConstant: 80).isActive = true
-        cell.modificador =  dish?.modifiers?[indexPath.item]
-        cell.tableView.heightAnchor.constraint(equalToConstant: CGFloat((dish?.modifiers?[indexPath.item].options!.count)! * 50)).isActive = true
+        cell.modificador =  modifiers[indexPath.item]
+        cell.tableView.heightAnchor.constraint(equalToConstant: CGFloat((modifiers[indexPath.item].options!.count) * 50)).isActive = true
         return cell
     }
     
@@ -487,7 +523,7 @@ extension EditDishMenuController : UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            self.dish?.modifiers?.remove(at: indexPath.row)
+            self.modifiers.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             
         }
@@ -497,12 +533,14 @@ extension EditDishMenuController : UITableViewDataSource {
     }
     
 }
+
 extension EditDishMenuController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
         return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         imgData = (image?.jpegData(compressionQuality: 0.1))!
         addDishImg.image = image

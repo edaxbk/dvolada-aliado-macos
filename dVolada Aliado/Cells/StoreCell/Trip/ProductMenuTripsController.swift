@@ -14,24 +14,26 @@ class ProductMenuTripsController : UIViewController{
     var dishes : Dish? {
         didSet{
             
-            if let url = dishes?.images?.first{
-//                bgImage.loadImage(url: url)
+      
+            if let urlImage = dishes?.images?.first{
+                bgImage.loadImage(url: urlImage)
+            }
+            if let title = dishes?.title{
+                nameLabel.text = title
+            }
+            if let desc = dishes?.description {
+                descLabel.text = desc
+            }
+            if let price = dishes?.price {
+                costo = Float(price)
             }
             
-            nameLabel.text = dishes?.title
-            descLabel.text = dishes?.description
-            costo = Float((dishes?.price!)!)
-            
-            /*namedishLabel.text = dishes?.title
-            descDishLabel.text = dishes?.description
-            if let p = dishes?.price {
-                    priceLabel.text = "MX$\(p)"
-            }*/
         }
     }
     
+    
     var contador = 1
-    var costo : Float = 120
+    var costo : Float = 0.00
     var total: Float = 0.00
     
     var bgImage : UIImageView = {
@@ -268,7 +270,6 @@ class ProductMenuTripsController : UIViewController{
     }
     
     @objc func addProduct(_sender: UIButton) {
-      
         navigationController?.popViewController(animated: true)
     }
 }

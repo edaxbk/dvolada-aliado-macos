@@ -20,6 +20,8 @@ class Store : Decodable , Encodable{
     
     var score: Int?
     
+    var state : String?
+    
     var banner: String?
         
     var date_subscription: String?

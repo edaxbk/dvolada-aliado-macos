@@ -265,7 +265,7 @@ class EditModificadorControll : UIViewController,UITableViewDelegate  {
         ])
         tableView.register( UITableViewCell.self, forCellReuseIdentifier: modId)
         
-         addOpcBtn.addTarget(self, action: #selector(addOpcAction), for: .touchUpInside)
+        addOpcBtn.addTarget(self, action: #selector(addOpcAction), for: .touchUpInside)
         confirmBtn.addTarget(self, action: #selector(createModifierAction), for: .touchUpInside)
 
     }

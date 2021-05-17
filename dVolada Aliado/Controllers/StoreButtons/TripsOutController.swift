@@ -183,9 +183,9 @@ class TripsOutController : UIViewController, MKMapViewDelegate,UISearchBarDelega
     
     @objc func pushMenuStore() {
         
-        let menuStoreCollection = MenuStoreController(collectionViewLayout: UICollectionViewFlowLayout())
+        //let menuStoreCollection = MenuStoreController(collectionViewLayout: 9
         //menuStoreCollection.menus = menus
-        navigationController?.pushViewController(menuStoreCollection, animated: true)
+        //navigationController?.pushViewController(menuStoreCollection, animated: true)
      }
     /*
     func checkLocationServices() {

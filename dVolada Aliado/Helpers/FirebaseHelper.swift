@@ -87,6 +87,19 @@ class FirebaseAPI {
             }
     }
     
+    func getSettings(onCompletion : @escaping (_ list : Settings) -> Void){
+        Database.database().reference(withPath : "settings").observeSingleEvent(of: .value, with: { (snapshot) in
+            if(snapshot.exists()){
+                guard let value = snapshot.value else { return }
+                   do {
+                       let settings = try FirebaseDecoder().decode(Settings.self, from: value)
+                       onCompletion(settings)
+                   } catch let error {
+                       print(error)
+                   }
+            }
+        })
+    }
 
 }
 

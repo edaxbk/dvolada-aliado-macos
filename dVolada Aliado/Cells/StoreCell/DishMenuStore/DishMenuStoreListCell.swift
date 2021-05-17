@@ -10,7 +10,6 @@ import UIKit
 class DishMenuStoreListCell: UITableViewCell {
     
     var ordenID = "ordenid"
-    
     var dishes : Dish? {
         didSet{
             
@@ -21,8 +20,8 @@ class DishMenuStoreListCell: UITableViewCell {
             }
             
             namedishLabel.text = dishes?.title
-            descDishLabel.text = dishes?.description
             
+            descDishLabel.text = dishes?.description
             if let p = dishes?.price {
                 priceLabel.text = "MX$\(String(format: "%.2f",Float(p)))"
             }
@@ -74,6 +73,7 @@ class DishMenuStoreListCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.text = "MX$100.00"
+        label.textColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
         return label
     }()
     

@@ -13,7 +13,6 @@ import Alamofire
     encoder.outputFormatting = .prettyPrinted
     let data = try! encoder.encode(data)
     print(String(data: data, encoding: .utf8)!)
-    return String(data: data, encoding: .utf8)!
 */
 
 
@@ -212,8 +211,24 @@ class ServerHelper {
         }
     }
     // MARK:GET menu store
-    func getMenuFromStore(id : String , onCompletion : @escaping (_ list : Array<Menu>) -> Void){
+    func getMenuFromStoreAll(id : String , onCompletion : @escaping (_ list : Array<Menu>) -> Void){
         let url = "\(BASE_URL)/store/menu_category/\(id)"
+        
+        AF.request(url).responseDecodable(of: MenuResponse.self) { response in
+            switch response.result {
+            case .success:
+                if(response.value != nil){
+                    if(response.value!.result != nil){
+                        onCompletion(response.value!.result!)
+                    }
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    func getMenuFromStore(id : String , onCompletion : @escaping (_ list : Array<Menu>) -> Void){
+        let url = "\(BASE_URL)/restaurant/menu_category/\(id)"
         
         AF.request(url).responseDecodable(of: MenuResponse.self) { response in
             switch response.result {
@@ -277,11 +292,16 @@ class ServerHelper {
         let url = "\(BASE_URL)/restaurant/dish"
 
         print("::-..>>",dish)
-        AF.request(url, method: .put, parameters: dish).validate().responseDecodable(of: Dish.self) { response in
+        AF.request(url, method: .put, parameters: dish, encoder: JSONParameterEncoder.default).validate().responseDecodable(of:BooleanResponse.self) { response in
                 print("DISH RESPONSE",response)
+            switch response.result {
+            case .success:
+                onCompletion(response.value!)
+            case let .failure(error):
+                print(error)
+            }
         }
     }
-    
     
     //POST dish menu store
     func postDishMenuFromStore(id: String, menuId: String, dish: Dish ,onCompletion: @escaping (_ store : BooleanResponse) -> Void ){
@@ -291,14 +311,10 @@ class ServerHelper {
         dishBody.store = id
         dishBody.id_menu = menuId
         
-        AF.request(url, method: .post, parameters: dishBody).validate().responseDecodable(of:BooleanResponse.self) { response in
+        AF.request(url, method: .post, parameters: dishBody, encoder: JSONParameterEncoder.default).validate().responseDecodable(of:BooleanResponse.self) { response in
             switch response.result {
             case .success:
-                if(response.value != nil){
-                    if(response.value?.success != nil){
-                        onCompletion(response.value!)
-                    }
-                }
+                onCompletion(response.value!)
             case let .failure(error):
                 print(error)
             }
@@ -356,9 +372,78 @@ class ServerHelper {
             }
         }
     }
+    //MARK: GET FEE COST
+
+    func getFeeCost(locationStore : LatLng, destination : LatLng, state : String, onSuccess : @escaping (_ priceFee: PriceFee) -> Void){
+        
+        let url = "\(BASE_URL)/client/fee/\(locationStore.latitude!)/\(locationStore.longitude!)/\(destination.latitude!)/\(destination.longitude!)/\(state)"
+        
+        AF.request(url).responseDecodable(of: PriceFeeResponse.self) { response in
+            switch response.result {
+            case .success:
+                if(response.value != nil){
+                    if(response.value!.result != nil){
+                        onSuccess(response.value!.result!)
+                    }
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
     
+    //MARK: POST CREAR ORDER
     
+    func createOrder(order : Order, onCompletion : @escaping (_ data : TransactionResponse) -> Void){
+        
     
-    
+        let url = "\(BASE_URL)/transaction"
+        
+        let session = URLSession.shared
+
+           //now create the URLRequest object using the url object
+           var request = URLRequest(url: URL(string: url)!)
+           request.httpMethod = "POST" //set http method as POST
+
+           do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: order.dict!, options: .prettyPrinted) // pass dictionary to nsdata object and set it as request body
+           } catch let error {
+               print(error.localizedDescription)
+           }
+
+           request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+           request.addValue("application/json", forHTTPHeaderField: "Accept")
+
+           //create dataTask using the session object to send data to the server
+           let task = session.dataTask(with: request as URLRequest, completionHandler: { data, response, error in
+
+               guard error == nil else {
+                   return
+               }
+
+               guard let data = data else {
+                   return
+               }
+
+               do {
+                   //create json object from data
+                   if let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] {
+                    
+                    
+                    let transactionResponse = TransactionResponse()
+                    
+                    transactionResponse._id = json["_id"] as! String?
+                    
+                    onCompletion(transactionResponse)
+                       // handle json...
+                   }
+               } catch let error {
+                   print(error.localizedDescription)
+               }
+           })
+           task.resume()
+        
+        
+    }
     
 }

@@ -14,11 +14,14 @@ class MapController: UIViewController , GMSMapViewDelegate{
     
     
     var mapView : GMSMapView?
-    var locationUser : GMSMarker?
+    
     var direction = Direction()
     
-    var listener : DirectionsListener?
-    
+    var resultsViewController: GMSAutocompleteResultsViewController?
+    var searchController: UISearchController?
+    var resultView: UITextView?
+
+    var locationVar : LatLng?
     
     let imageMarker : UIImageView = {
         
@@ -29,6 +32,16 @@ class MapController: UIViewController , GMSMapViewDelegate{
         
     }()
     
+    let searchBtn : UIButton = {
+        let button =  UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "magnifyingglass.circle.fill"), for: .normal)
+        button.widthAnchor.constraint(equalToConstant: 50) .isActive = true
+        button.backgroundColor = UIColor(red: 0.94, green: 0.42, blue: 0.00, alpha: 1.00)
+        button.layer.cornerRadius = 10
+        button.tintColor = .white
+    return button
+    }()
     
     var confirmDireccion : UIButton =  {
         
@@ -44,24 +57,13 @@ class MapController: UIViewController , GMSMapViewDelegate{
     }()
     
     @objc func handleConfirmDirection () {
-        
-        print("HANDLE OK DIRECCTIONRR")
-        
-        let variable = direction.coordinates?.latitude
-        let menuStoreCollection = MenuStoreController(collectionViewLayout: UICollectionViewFlowLayout())
-        
-        menuStoreCollection.listener = listener
-        menuStoreCollection.direction = direction
+        ServerHelper.shared.findAddress(latitude: (direction.coordinates!.latitude)!, longitude: direction.coordinates!.longitude!) { (direction) in
 
-        self.navigationController?.pushViewController(menuStoreCollection, animated: true)
-        print(" CORIDNATES :: ", variable)
-     /*
-        let controller = ConfirmDirectionController()
-        controller.listener = listener
-        controller.direction = direction
-    
-        self.navigationController?.pushViewController(controller, animated: true)
-       */
+            self.direction.direction = direction.direction
+            let menuStoreCollection = MenuStoreController()
+            menuStoreCollection.direction = direction
+            self.navigationController?.pushViewController(menuStoreCollection, animated: true)
+        }
     }
        
     
@@ -78,17 +80,61 @@ class MapController: UIViewController , GMSMapViewDelegate{
         button.addTarget(self, action: #selector(onExitClick), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         
+        
         mapView = createMapView()
         loadMap()
+        
+        view.addSubview(searchBtn)
+
+        NSLayoutConstraint.activate([
+            searchBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: -150),
+            searchBtn.rightAnchor.constraint(equalTo: view.rightAnchor,constant: -20),
+            searchBtn.widthAnchor.constraint(equalToConstant: 50),
+            searchBtn.heightAnchor.constraint(equalToConstant: 50),
+        ])
+
+        searchBtn.addTarget(self, action: #selector(PushSeacrhAction), for: .touchUpInside)
+        
+        
+    }
     
+    @objc func PushSeacrhAction() {
+        loadSearchControoler()
     }
     
     
     func createMapView ()-> GMSMapView{
         let map = GMSMapView();
         map.translatesAutoresizingMaskIntoConstraints = false
-       
         return map;
+    }
+    
+    func loadSearchControoler() {
+        resultsViewController = GMSAutocompleteResultsViewController()
+        resultsViewController?.delegate = self
+
+        searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController?.searchResultsUpdater = resultsViewController
+        
+        searchController?.searchBar.barTintColor = .orange
+        searchController?.searchBar.placeholder =  "Buscar una dirección"
+        searchController?.searchBar.layer.backgroundColor = UIColor.red.cgColor
+        searchController?.searchBar.searchTextField.backgroundColor = .white
+        searchController?.searchBar.searchTextField.textColor =  .black
+        searchController?.searchBar.tintColor = .white
+        
+        let subView = UIView(frame: CGRect(x: 0, y: 50, width: view.frame.width, height: 45.0))
+
+        subView.addSubview((searchController?.searchBar)!)
+        view.addSubview(subView)
+        
+       
+        searchController?.searchBar.sizeToFit()
+        searchController?.hidesNavigationBarDuringPresentation = false
+
+        // When UISearchController presents the results view, present it in
+        // this view controller, not one further up the chain.
+        definesPresentationContext = true
     }
     
     
@@ -105,15 +151,10 @@ class MapController: UIViewController , GMSMapViewDelegate{
             imageMarker.heightAnchor.constraint(equalToConstant: 40).isActive = true;
             mapView.delegate = self
             
+            let locationStore = locationVar
             
-            /*
-            let camera = GMSCameraPosition.camera(withLatitude: (direction?.coordinates!.latitude)!,
-                                                  longitude: (direction?.coordinates!.longitude)!,
-                                                  zoom: 20)
-            */
-            let locationStore = LocalHelper.shared.getClient()?.location
-            let camera = GMSCameraPosition.camera(withLatitude: (locationStore?.latitude )!,
-                                                  longitude: ( locationStore?.longitude)!,
+            let camera = GMSCameraPosition.camera(withLatitude: (locationStore?.latitude)!,
+                                                  longitude: (locationStore?.longitude)!,
                                                   zoom: 20)
             mapView.camera = camera
                  
@@ -128,9 +169,7 @@ class MapController: UIViewController , GMSMapViewDelegate{
             
         }
     }
-    
-    
-    
+        
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         let coordinate = mapView.projection.coordinate(for: imageMarker.center)
         direction.coordinates = LatLng(latitude: coordinate.latitude , longitude: coordinate.longitude)
@@ -138,6 +177,31 @@ class MapController: UIViewController , GMSMapViewDelegate{
 
     @objc func onExitClick (){
         dismiss(animated: true, completion: nil)
-        //self.navigationController?.popViewController(animated: true)
     }
+}
+
+
+// Handle the user's selection.
+extension MapController: GMSAutocompleteResultsViewControllerDelegate {
+  func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                         didAutocompleteWith place: GMSPlace) {
+    searchController?.isActive = false
+    locationVar = LatLng(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+    self.viewDidLoad()
+  }
+
+  func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
+                         didFailAutocompleteWithError error: Error){
+    // TODO: handle the error.
+    print("Error: ", error.localizedDescription)
+  }
+
+  // Turn the network activity indicator on and off again.
+  func didRequestAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
+  }
+
+  func didUpdateAutocompletePredictions(forResultsController resultsController: GMSAutocompleteResultsViewController) {
+    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+  }
 }
