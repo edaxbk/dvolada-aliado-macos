@@ -53,11 +53,11 @@ class MenuStoreCell: UITableViewCell {
             nameMenuLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             nameMenuLabel.leftAnchor.constraint(equalTo: leftAnchor,constant: 20),
             nameMenuLabel.heightAnchor.constraint(equalTo: heightAnchor),
-            nameMenuLabel.widthAnchor.constraint(equalToConstant: frame.width/2),
+            nameMenuLabel.widthAnchor.constraint(equalTo: widthAnchor,constant: -100) ,
             
             isAvailableLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             isAvailableLabel.rightAnchor.constraint(equalTo: rightAnchor,constant: -20),
-            isAvailableLabel.widthAnchor.constraint(equalToConstant: frame.width/2),
+            isAvailableLabel.widthAnchor.constraint(equalToConstant: 100),
             isAvailableLabel.heightAnchor.constraint(equalTo: heightAnchor),
         ])
     }

@@ -33,8 +33,6 @@ class MenuStoreController: UIViewController, UITableViewDelegate, DishListener ,
     var listOfCart = Array<Cart>()
     
     var menuID = "menuID"
-    let searchController = UISearchController(searchResultsController: nil)
-    var filterDish: [Dish] = []
     
     override func viewWillAppear(_ animated: Bool) {
         ServerHelper.shared.getMenuFromStore(id: (LocalHelper.shared.getClient()?._id)!) { (arrayMenu) in
@@ -49,9 +47,7 @@ class MenuStoreController: UIViewController, UITableViewDelegate, DishListener ,
                     var elements = -1
                     
                     menu.menu!.forEach { (dish) in
-                        
-                        print(dish.title!,dish.isAvailable!)
-                        
+                                                
                         if(dish.isAvailable!){
                             listOfDishes.append(dish)
                             elements = elements + 1
@@ -91,28 +87,9 @@ class MenuStoreController: UIViewController, UITableViewDelegate, DishListener ,
         table.backgroundColor =  .white
         return table
     }()
-    var isFiltering: Bool {
-        return searchController.isActive && !isSearchBarEmpty
-    }
-    var isSearchBarEmpty: Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Menu"
-        
-        // 1
-        searchController.searchResultsUpdater = self
-        // 2
-        searchController.obscuresBackgroundDuringPresentation = false
-        // 3
-        searchController.searchBar.placeholder = "Buscar platillo"
-        // 4
-        navigationItem.searchController = searchController
-        // 5
-        definesPresentationContext = true
-        
-        
         
         tableView.dataSource = self
         tableView.delegate =  self
@@ -181,10 +158,11 @@ extension MenuStoreController : UITableViewDataSource {
         
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
         
-        label.text = listOfMenu[section].title
+        label.text = "  " + listOfMenu[section].title!
         label.font = UIFont.boldSystemFont(ofSize: 20)
         
-        view.backgroundColor = .white
+        view.backgroundColor = .orange
+        view.layer.cornerRadius = 20
         view.addSubview(label)
         return view
     }
@@ -201,6 +179,7 @@ extension MenuStoreController : UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: menuID, for: indexPath) as! DishMenuStoreListCell
         cell.dishes = listOfMenu[indexPath.section].menu?[indexPath.item]
+        cell.isAvailableLabel.isHidden = true
         return cell
         
     }
@@ -216,12 +195,4 @@ extension MenuStoreController : UITableViewDataSource {
          self.navigationController?.pushViewController(dishColelction, animated: true)*/
     }
     
-}
-
-extension MenuStoreController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        // TODO
-        let searchBar = searchController.searchBar
-        //filterContentForSearchText(searchBar.text!)
-    }
 }
