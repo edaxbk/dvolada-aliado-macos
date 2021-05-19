@@ -393,7 +393,7 @@ class StoreController : UIViewController {
     }
     
     @objc func openUploadVideoOutCollection() {
-        
+        /*
         let uploadVideoController = UploadVideoController(collectionViewLayout: UICollectionViewFlowLayout())
         let unavigationController = UINavigationController(rootViewController: uploadVideoController)
         unavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -403,5 +403,6 @@ class StoreController : UIViewController {
         
         uploadVideoController.title = seting
         self.present(unavigationController, animated: true, completion: nil)
+         */
     }
 }
