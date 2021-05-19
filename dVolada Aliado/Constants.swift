@@ -9,8 +9,8 @@
 import Foundation
 
 //public let BASE_URL = "https://dvolada-primary-server.herokuapp.com"
-//public let BASE_URL = "https://dev-prueba-server.herokuapp.com"
-public let BASE_URL = "http://192.168.0.179:8080"
+public let BASE_URL = "https://dev-prueba-server.herokuapp.com"
+//public let BASE_URL = "http://192.168.0.179:8080"
 
 //public let BASE_URL = "http://192.168.0.8:8080"
 

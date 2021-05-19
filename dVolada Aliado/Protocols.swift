@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 //Protocolo para presionar un add en un mofigicador
+
+protocol OrderPreparingFinish {
+    func onClientSaved(transaction : Order )
+}
+
+
 protocol AddTableViewCellDelegate: class {
     func didPressButtonAdd(sender: UIButton)
     func didPressButtonEdit(sender: UIButton)

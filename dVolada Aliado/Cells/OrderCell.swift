@@ -14,6 +14,8 @@ class OrderCell: UICollectionViewCell {
     var order : Order? {
         didSet{
             if(order?._id != nil){
+                print("STATUS::",order?.status)
+                
                 idLabel.text = String((order?._id?.prefix(6))!)
                 nameLabel.text = order?.client?.complete_name
                                 
@@ -42,12 +44,21 @@ class OrderCell: UICollectionViewCell {
                     
                     ])
                     
+                    btn.addTarget(self, action: #selector(SelectedPreparingFinish), for: .touchUpInside)
+                    
+                    
+                    
                 }else{
                     backgroundColor = UIColor(red: 0.30, green: 0.69, blue: 0.31, alpha: 1.00)
                 }
                 
             }
         }
+    }
+    
+    @objc func SelectedPreparingFinish(_ sender: UIButton){
+        
+        print("click",order?._id,order?.client?.complete_name)
     }
     let btn : UIButton = {
         let button = UIButton(type: .system)
@@ -74,6 +85,7 @@ class OrderCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .white
+        
         return label
       }()
 
@@ -90,12 +102,12 @@ class OrderCell: UICollectionViewCell {
             
             idLabel.topAnchor.constraint(equalTo: topAnchor),
             idLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            idLabel.widthAnchor.constraint(equalToConstant: 200),
+            idLabel.widthAnchor.constraint(equalToConstant: 100),
             idLabel.leftAnchor.constraint(equalTo: leftAnchor),
             
             nameLabel.topAnchor.constraint(equalTo: topAnchor),
             nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            nameLabel.widthAnchor.constraint(equalToConstant: 200),
+            nameLabel.widthAnchor.constraint(equalTo: widthAnchor,constant: -200 ),
             nameLabel.leftAnchor.constraint(equalTo: idLabel.rightAnchor ,constant: 10),
             
         

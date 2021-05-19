@@ -76,7 +76,7 @@ class OrderListCell: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width - 50, height: 120)
+        return CGSize(width: frame.width - 50, height: 100)
     }
     
 }
