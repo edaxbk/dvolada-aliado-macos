@@ -446,4 +446,21 @@ class ServerHelper {
         
     }
     
+    //MARK: GET NewsFeed
+    
+    func getNewsFeedByStore(id : String , onCompletion : @escaping (_ list : Array<NewsFeed>) -> Void){
+        let url = "\(BASE_URL)/news/store/\(id)"
+        
+        AF.request(url).responseDecodable(of: Array<NewsFeed>.self) { response in
+            switch response.result {
+            case .success:
+                if(response.value != nil){
+                    onCompletion(response.value!)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
 }

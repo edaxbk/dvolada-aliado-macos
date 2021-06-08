@@ -88,6 +88,7 @@
 		4AD1D155264C35A900B45E3F /* PriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1D154264C35A900B45E3F /* PriceCell.swift */; };
 		4AD1D159264C492300B45E3F /* ClientDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1D158264C492300B45E3F /* ClientDataCell.swift */; };
 		4AD1D15C264C550700B45E3F /* WriteDataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD1D15B264C550700B45E3F /* WriteDataClient.swift */; };
+		4AD77C71266A9378001EB1DE /* ExtensionDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD77C70266A9378001EB1DE /* ExtensionDate.swift */; };
 		4AD8628A264B475300119562 /* FilePriceFee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD86289264B475100119562 /* FilePriceFee.swift */; };
 		4ADE63C4263871D400139CF1 /* EditModifierController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADE63C3263871D400139CF1 /* EditModifierController.swift */; };
 		4AE0CEAF2646E82500DDC65D /* CartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE0CEAE2646E82500DDC65D /* CartController.swift */; };
@@ -107,6 +108,9 @@
 		4AE5D51D251A8B4F0025A7D4 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE5D51C251A8B4F0025A7D4 /* Protocols.swift */; };
 		4AE88A242620DBD5007D1561 /* EditDishMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AE88A232620DBD5007D1561 /* EditDishMenuController.swift */; };
 		4AEEED942652E885009022DD /* ModifierItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AEEED932652E885009022DD /* ModifierItemCell.swift */; };
+		4AF087DB265BFDB00073B817 /* ViewNewsFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF087DA265BFDB00073B817 /* ViewNewsFeedController.swift */; };
+		4AF087DF265C03DC0073B817 /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF087DE265C03DC0073B817 /* NewsFeedCell.swift */; };
+		4AF087E3265C056C0073B817 /* NewsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF087E2265C056C0073B817 /* NewsFeed.swift */; };
 		4AF81E412516782F000DB875 /* DishCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF81E402516782F000DB875 /* DishCell.swift */; };
 		4AF81E432516A541000DB875 /* Dish.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF81E422516A541000DB875 /* Dish.swift */; };
 		4AFD92D52523BE8C00D10C1B /* DishMenuStoreHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AFD92D42523BE8C00D10C1B /* DishMenuStoreHeadView.swift */; };
@@ -209,6 +213,7 @@
 		4AD1D154264C35A900B45E3F /* PriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PriceCell.swift; path = "dVolada Aliado/Cells/innerCells/PriceCell.swift"; sourceTree = SOURCE_ROOT; };
 		4AD1D158264C492300B45E3F /* ClientDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientDataCell.swift; sourceTree = "<group>"; };
 		4AD1D15B264C550700B45E3F /* WriteDataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDataClient.swift; sourceTree = "<group>"; };
+		4AD77C70266A9378001EB1DE /* ExtensionDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDate.swift; sourceTree = "<group>"; };
 		4AD86289264B475100119562 /* FilePriceFee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePriceFee.swift; sourceTree = "<group>"; };
 		4ADE63C3263871D400139CF1 /* EditModifierController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditModifierController.swift; sourceTree = "<group>"; };
 		4AE0CEAE2646E82500DDC65D /* CartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartController.swift; sourceTree = "<group>"; };
@@ -228,6 +233,9 @@
 		4AE5D51C251A8B4F0025A7D4 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		4AE88A232620DBD5007D1561 /* EditDishMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDishMenuController.swift; sourceTree = "<group>"; };
 		4AEEED932652E885009022DD /* ModifierItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifierItemCell.swift; sourceTree = "<group>"; };
+		4AF087DA265BFDB00073B817 /* ViewNewsFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewNewsFeedController.swift; sourceTree = "<group>"; };
+		4AF087DE265C03DC0073B817 /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewsFeedCell.swift; path = "dVolada Aliado/Controllers/StoreButtons/NeewsFeed/NewsFeedCell.swift"; sourceTree = SOURCE_ROOT; };
+		4AF087E2265C056C0073B817 /* NewsFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeed.swift; sourceTree = "<group>"; };
 		4AF81E402516782F000DB875 /* DishCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCell.swift; sourceTree = "<group>"; };
 		4AF81E422516A541000DB875 /* Dish.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dish.swift; sourceTree = "<group>"; };
 		4AFD92D42523BE8C00D10C1B /* DishMenuStoreHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishMenuStoreHeadView.swift; sourceTree = "<group>"; };
@@ -253,6 +261,7 @@
 				3024FCAC253B5D670009A889 /* Gradient.swift */,
 				3024FCB0253B60220009A889 /* Colors.swift */,
 				30F3CB66253D391100E51723 /* ItemBarContentView.swift */,
+				4AD77C70266A9378001EB1DE /* ExtensionDate.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -306,6 +315,7 @@
 		4A200EC1251BFAE000E93EC4 /* StoreButtons */ = {
 			isa = PBXGroup;
 			children = (
+				4AF087D9265BFD7F0073B817 /* NeewsFeed */,
 				4ACB40B8261CCDE500D7909F /* TripOut */,
 				4ACB40B3261CCDA000D7909F /* MenuStore */,
 				4AB154092522541500AE8C55 /* New Group */,
@@ -323,7 +333,6 @@
 		4A74FAEC250A9790005945DA = {
 			isa = PBXGroup;
 			children = (
-				4ADE63C3263871D400139CF1 /* EditModifierController.swift */,
 				4A74FAF7250A9790005945DA /* dVolada Aliado */,
 				4A74FAF6250A9790005945DA /* Products */,
 				BFDCB51B14680C76C8C3E931 /* Pods */,
@@ -390,6 +399,7 @@
 		4A74FB21250A990B005945DA /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4AF087DD265C03630073B817 /* NeewsFeed */,
 				4AD1D14E264C350200B45E3F /* innerCells */,
 				4AE0CED72646F4AC00DDC65D /* ModifierCell */,
 				4AE0CECB2646F3C900DDC65D /* DishCell */,
@@ -435,6 +445,7 @@
 				4AE0CEB12646E8CE00DDC65D /* Settings.swift */,
 				4AE0CF012646FABA00DDC65D /* Price.swift */,
 				4AD86289264B475100119562 /* FilePriceFee.swift */,
+				4AF087E2265C056C0073B817 /* NewsFeed.swift */,
 			);
 			path = Pojos;
 			sourceTree = "<group>";
@@ -466,6 +477,7 @@
 				4ACB40C8261CCF9800D7909F /* AddNewMenuController.swift */,
 				4ABC4961261F9831006BF6BB /* AddNewDishController.swift */,
 				4AE88A232620DBD5007D1561 /* EditDishMenuController.swift */,
+				4ADE63C3263871D400139CF1 /* EditModifierController.swift */,
 				4A03CD61262229C100CE321C /* ModifierCollectionView.swift */,
 				4A03CD682623306300CE321C /* myTableView.swift */,
 				4A0B6B912624AE9400893A92 /* MyTableHeadCell.swift */,
@@ -554,6 +566,22 @@
 				4AE213BE263DEAF100330D22 /* DirectionItemCell.swift */,
 			);
 			path = DirectionCell;
+			sourceTree = "<group>";
+		};
+		4AF087D9265BFD7F0073B817 /* NeewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				4AF087DA265BFDB00073B817 /* ViewNewsFeedController.swift */,
+			);
+			path = NeewsFeed;
+			sourceTree = "<group>";
+		};
+		4AF087DD265C03630073B817 /* NeewsFeed */ = {
+			isa = PBXGroup;
+			children = (
+				4AF087DE265C03DC0073B817 /* NewsFeedCell.swift */,
+			);
+			path = NeewsFeed;
 			sourceTree = "<group>";
 		};
 		4AFD92D32523BE0F00D10C1B /* DishMenuStore */ = {
@@ -746,6 +774,7 @@
 				4A0AAE1D25156C99001B1128 /* HeaderDetails.swift in Sources */,
 				4ACB40C6261CCF5E00D7909F /* ProductMenuTripsController.swift in Sources */,
 				30F3CB97253DCDB600E51723 /* Conductor.swift in Sources */,
+				4AD77C71266A9378001EB1DE /* ExtensionDate.swift in Sources */,
 				30F3CB83253D481500E51723 /* OrderListCell.swift in Sources */,
 				4A74FB2F250A9A7E005945DA /* OrderCell.swift in Sources */,
 				4ADE63C4263871D400139CF1 /* EditModifierController.swift in Sources */,
@@ -775,6 +804,7 @@
 				4AD1D14C264C324500B45E3F /* WriteCuponController.swift in Sources */,
 				4A74FB23250A995B005945DA /* Extensions.swift in Sources */,
 				4AE0CED12646F3FB00DDC65D /* ModifierCell.swift in Sources */,
+				4AF087DF265C03DC0073B817 /* NewsFeedCell.swift in Sources */,
 				4AE0CEAF2646E82500DDC65D /* CartController.swift in Sources */,
 				4AD1D140264C30ED00B45E3F /* CartListCell.swift in Sources */,
 				4A6A54E4251E6BBE00FF0423 /* Schedule.swift in Sources */,
@@ -797,6 +827,7 @@
 				3098E863252524BD00CACBCE /* LocalHelper.swift in Sources */,
 				4A74FB37250A9C13005945DA /* HomeTabBarController.swift in Sources */,
 				4AE5D51D251A8B4F0025A7D4 /* Protocols.swift in Sources */,
+				4AF087E3265C056C0073B817 /* NewsFeed.swift in Sources */,
 				4A1A5C87250ABCD40069A182 /* Order.swift in Sources */,
 				3024FCAD253B5D670009A889 /* Gradient.swift in Sources */,
 				4A03CD62262229C200CE321C /* ModifierCollectionView.swift in Sources */,
@@ -811,6 +842,7 @@
 				4A74FB31250A9B6D005945DA /* PrepareOrderCell.swift in Sources */,
 				4AE0CED52646F41600DDC65D /* QuantityCell.swift in Sources */,
 				4AE213BF263DEAF100330D22 /* DirectionItemCell.swift in Sources */,
+				4AF087DB265BFDB00073B817 /* ViewNewsFeedController.swift in Sources */,
 				4ACB40B1261CCD3100D7909F /* VideoCell.swift in Sources */,
 				4AE0CEB52646E92600DDC65D /* TripTools.swift in Sources */,
 				4AE88A242620DBD5007D1561 /* EditDishMenuController.swift in Sources */,
@@ -959,14 +991,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "dVolada Aliado/dVolada Aliado.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = SU2X64TGD7;
 				INFOPLIST_FILE = "dVolada Aliado/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dvolada.mx.aliados;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -981,14 +1013,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "dVolada Aliado/dVolada Aliado.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 2.0;
 				DEVELOPMENT_TEAM = SU2X64TGD7;
 				INFOPLIST_FILE = "dVolada Aliado/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dvolada.mx.aliados;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

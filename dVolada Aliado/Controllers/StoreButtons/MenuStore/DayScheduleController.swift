@@ -155,9 +155,7 @@ class DayScheduleController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        print("STORE:::",store?.name!)
-        
+                
         view.addSubview(switchAvailable)
         view.addSubview(dayLabel)
         view.addSubview(openHourBtn)

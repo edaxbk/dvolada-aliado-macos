@@ -296,7 +296,6 @@ class StoreController : UIViewController {
     
     
     @objc func handleDismissView() {
-        print("dismiss")
         dismiss(animated: true, completion: nil)
         //self.navigationController?.popViewController(animated: true)
     }
@@ -332,8 +331,8 @@ class StoreController : UIViewController {
             openTripsOutCollection()
         case .estadistics:
             openstatisticsController()
-        case .dvolada:
-            openUploadVideoOutCollection()
+        /*case .dvolada:
+            openUploadVideoOutCollection()*/
         default:
             print("No selecciono nada")
         }
@@ -394,15 +393,17 @@ class StoreController : UIViewController {
     
     @objc func openUploadVideoOutCollection() {
         /*
-        let uploadVideoController = UploadVideoController(collectionViewLayout: UICollectionViewFlowLayout())
-        let unavigationController = UINavigationController(rootViewController: uploadVideoController)
+        //let uploadVideoController = UploadVideoController(collectionViewLayout: UICollectionViewFlowLayout())
+        let newsFeedViewController = NewsFeedViewController()
+        let unavigationController = UINavigationController(rootViewController: newsFeedViewController)
         unavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         unavigationController.navigationBar.backgroundColor = UIColor.primaryColor
         unavigationController.navigationBar.isTranslucent = true
         unavigationController.navigationBar.tintColor = .black
         
-        uploadVideoController.title = seting
+        newsFeedViewController.title = seting
         self.present(unavigationController, animated: true, completion: nil)
-         */
+         w*/
+         
     }
 }

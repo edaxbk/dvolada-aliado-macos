@@ -6,20 +6,23 @@
 //  Copyright © 2021 Miguel Ledezma. All rights reserved.
 //
 import UIKit
+import NVActivityIndicatorView
+
 class MenuStoreTableView : UIViewController, UITableViewDelegate {
     
     var menuID = "menuID"
     var listOfMenu = Array<Menu>()
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool){
+        
         ServerHelper.shared.getMenuFromStoreAll(id: (LocalHelper.shared.getClient()?._id)!) { (arrayMenu) in
             self.listOfMenu.removeAll()
             self.listOfMenu.append(contentsOf: arrayMenu)
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
     }
+    
+
     
     var tableView : UITableView = {
         let table = UITableView()
@@ -38,6 +41,7 @@ class MenuStoreTableView : UIViewController, UITableViewDelegate {
         tableView.allowsMultipleSelectionDuringEditing = false
         
         view.backgroundColor = .white
+        
         view.addSubview(tableView)
         
         let button = UIButton()

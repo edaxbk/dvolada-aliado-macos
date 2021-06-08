@@ -148,8 +148,7 @@ class DishController: UICollectionViewController , UICollectionViewDelegateFlowL
         
         
         listener?.onItemAdded(cart: cart)
-        navigationController?.popViewController(animated: true)
-        //navigationController?.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
     
     

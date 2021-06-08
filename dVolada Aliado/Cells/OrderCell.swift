@@ -14,7 +14,6 @@ class OrderCell: UICollectionViewCell {
     var order : Order? {
         didSet{
             if(order?._id != nil){
-                print("STATUS::",order?.status)
                 
                 idLabel.text = String((order?._id?.prefix(6))!)
                 nameLabel.text = order?.client?.complete_name
@@ -58,7 +57,8 @@ class OrderCell: UICollectionViewCell {
     
     @objc func SelectedPreparingFinish(_ sender: UIButton){
         
-        print("click",order?._id,order?.client?.complete_name)
+            
+        
     }
     let btn : UIButton = {
         let button = UIButton(type: .system)

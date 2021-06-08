@@ -14,7 +14,6 @@ enum SettingName: String {
     case dishes = "Platillos"
     case trips = "Viajes por fuera"
     case estadistics = "Estadisticas"
-    case dvolada = "dVolada TV"
 }
 
 class Setting: NSObject {
@@ -47,7 +46,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     let settings: [Setting] = {
         let settingsSetting = Setting(name: .schedules, imageName: "clock")
         
-        return [settingsSetting, Setting(name: .dishes, imageName: "square.split.2x2.fill"), Setting(name: .trips, imageName: "cart.fill"), Setting(name: .estadistics, imageName: "line.horizontal.3.decrease.circle"), Setting(name: .dvolada, imageName: "tv")]
+        return [settingsSetting, Setting(name: .dishes, imageName: "square.split.2x2.fill"), Setting(name: .trips, imageName: "cart.fill"), Setting(name: .estadistics, imageName: "line.horizontal.3.decrease.circle")/*, Setting(name: .dvolada, imageName: "tv")*/]
     }()
     
     func showSettings() {

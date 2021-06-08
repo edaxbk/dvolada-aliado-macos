@@ -14,6 +14,7 @@ class ScheduleStoreCollection : UICollectionViewController , UICollectionViewDel
     override func viewWillAppear(_ animated: Bool) {
         ServerHelper.shared.getStoreById(id: (LocalHelper.shared.getClient()?._id)!) { (getstore) in
             self.store = getstore
+            
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }

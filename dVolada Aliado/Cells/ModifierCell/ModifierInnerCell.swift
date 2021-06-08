@@ -130,6 +130,7 @@ class ModifierInnerCell : UICollectionViewCell {
         print("VALUE CHANGED")
         
         if(checkbox.value as! Bool){
+            print(limit," :: ", SELECTION_RANGE)
             if (limit == SELECTION_RANGE) {
                 optionsSelected?.append(option!)
             } else if (optionsSelected!.count < limit) {

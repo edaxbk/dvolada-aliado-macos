@@ -13,6 +13,7 @@ class MenuStoreController: UIViewController, UITableViewDelegate, DishListener ,
         print("on transactionlistener")
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
+    
     var direction : Direction?
     
     func onDishSelected(dish: Dish) {
@@ -27,6 +28,18 @@ class MenuStoreController: UIViewController, UITableViewDelegate, DishListener ,
         listOfCart.append(cart)
         addProductButton.isHidden = false
         view.layoutIfNeeded()
+    }
+    
+    func onListUpdate(cart: Array<Cart>) {
+        
+        print("ON LIST UPDATE")
+        listOfCart.removeAll()
+        listOfCart.append(contentsOf: cart)
+        
+        if(listOfCart.isEmpty){
+            addProductButton.isHidden = true
+            view.layoutIfNeeded()
+        }
     }
 
     var listOfMenu = Array<Menu>()
@@ -120,17 +133,6 @@ class MenuStoreController: UIViewController, UITableViewDelegate, DishListener ,
         dismiss(animated: true, completion: nil)
     }
     
-    func onListUpdate(cart: Array<Cart>) {
-        
-        print("ON LIST UPDATE")
-        listOfCart.removeAll()
-        listOfCart.append(contentsOf: cart)
-        
-        if(listOfCart.isEmpty){
-            addProductButton.isHidden = true
-            view.layoutIfNeeded()
-        }
-    }
     
     @objc func viewCart(){
         print("ESTOY EN VIEW CART")
