@@ -25,17 +25,24 @@ class NewsFeedViewController : UIViewController, UITableViewDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.listOfNewsFeed.removeAll()
-
-        ServerHelper.shared.getNewsFeedByStore(id: (LocalHelper.shared.getClient()?._id)!) { list in
+        
+        if(listOfNewsFeed.isEmpty){
             
-            print(list.count)
-            self.listOfNewsFeed.append(contentsOf: list)
-            self.listOfNewsFeed.reverse()
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            ServerHelper.shared.getNewsFeedByStore(id: (LocalHelper.shared.getClient()?._id)!) { list in
+                                
+                list.forEach { item in
+                    if(item.type == "image"){
+                        self.listOfNewsFeed.append(item)
+                    }
+                }
+                
+                //self.listOfNewsFeed.reverse()
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
+            
         }
     }
     
@@ -48,7 +55,7 @@ class NewsFeedViewController : UIViewController, UITableViewDelegate {
         
         tableView.dataSource = self
         tableView.delegate =  self
-        
+
         view.addSubview(tableView)
         
         NSLayoutConstraint.activate([

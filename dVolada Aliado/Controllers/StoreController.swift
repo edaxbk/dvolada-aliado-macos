@@ -331,8 +331,8 @@ class StoreController : UIViewController {
             openTripsOutCollection()
         case .estadistics:
             openstatisticsController()
-        /*case .dvolada:
-            openUploadVideoOutCollection()*/
+        case .newsFeed:
+            openUploadVideoOutCollection()
         default:
             print("No selecciono nada")
         }
@@ -392,7 +392,7 @@ class StoreController : UIViewController {
     }
     
     @objc func openUploadVideoOutCollection() {
-        /*
+        
         //let uploadVideoController = UploadVideoController(collectionViewLayout: UICollectionViewFlowLayout())
         let newsFeedViewController = NewsFeedViewController()
         let unavigationController = UINavigationController(rootViewController: newsFeedViewController)
@@ -403,7 +403,7 @@ class StoreController : UIViewController {
         
         newsFeedViewController.title = seting
         self.present(unavigationController, animated: true, completion: nil)
-         w*/
+         
          
     }
 }

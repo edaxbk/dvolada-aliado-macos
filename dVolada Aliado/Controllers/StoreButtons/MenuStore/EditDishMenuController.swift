@@ -249,7 +249,7 @@ class EditDishMenuController: UIViewController, UITextViewDelegate, UITableViewD
         title = "Editar"
         
         view.addSubview(scrollView)
-        view.backgroundColor = .purple
+        view.backgroundColor = .white
         scrollView.backgroundColor = .white
         tableView.backgroundColor = .white
         viewDish.backgroundColor = .white

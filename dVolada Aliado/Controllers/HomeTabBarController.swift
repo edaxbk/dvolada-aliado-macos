@@ -223,6 +223,12 @@ class HomeTabBarController: ESTabBarController, UITabBarControllerDelegate , Ord
                 break
             default:
                 print("Unknown")
+                NSLayoutConstraint.activate([
+                    customTabBarView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
+                    customTabBarView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5),
+                    customTabBarView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -5),
+                    customTabBarView.heightAnchor.constraint(equalToConstant: 90)
+                ])
             }
             
          case .pad:

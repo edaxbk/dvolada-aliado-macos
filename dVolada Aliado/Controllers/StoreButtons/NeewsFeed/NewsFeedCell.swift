@@ -11,7 +11,6 @@ class NewsFeedCell: UITableViewCell {
     
     var newsFeed : NewsFeed? {
         didSet{
-            
             storeLogoImage.loadImageCropped(url: (newsFeed?.store?.url_logo)!)
             nameStoreLabel.text = newsFeed?.store?.name
             let date = Date.init(milliseconds: (newsFeed?.date_created!)!)
@@ -34,27 +33,6 @@ class NewsFeedCell: UITableViewCell {
             }else{
                 footerLabel.text! +=  " 0 comentarios"
             }
-            
-            if let type = newsFeed?.type {
-                switch type {
-                case "text":
-                    print("ES texto")
-                    break
-                case "image":
-                    if let urlImage = newsFeed?.media?.first?.url!{
-                        imageContentView.loadImageCropped(url: urlImage)
-                    }
-                    
-                    break
-                case "video":
-                    print("ES video")
-                    break
-                default:
-                    print("Ningun tipo")
-                }
-            }
-            
-            
         
         }
     }
@@ -119,10 +97,14 @@ class NewsFeedCell: UITableViewCell {
     }()
     
     var imageContentView : UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "logo")
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "logo")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .red
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
     }()
     
     //Footer
@@ -269,7 +251,6 @@ class NewsFeedCell: UITableViewCell {
             imageContentView.leftAnchor.constraint(equalTo: tempView.leftAnchor),
             imageContentView.rightAnchor.constraint(equalTo: tempView.rightAnchor),
             imageContentView.heightAnchor.constraint(equalToConstant: 300),
-
             imageContentView.bottomAnchor.constraint(equalTo: tempView.bottomAnchor),
             
         ])
